@@ -7,7 +7,10 @@ A machine learning web application that predicts medical conditions based on pat
 - Predicts medical conditions using demographic and clinical details  
 - Interactive web interface built with Streamlit  
 - Displays prediction confidence for top probable conditions  
-- Scalable for integration with hospital data systems  
+- Scalable for integration with hospital data systems
+
+## Dataset 
+Link : https://www.kaggle.com/datasets/prasad22/healthcare-dataset
 
 ## Project Structure
 ```
