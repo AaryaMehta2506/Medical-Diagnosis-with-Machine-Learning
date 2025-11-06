@@ -1,78 +1,67 @@
 AI/ML Advance Project
 # Medical Diagnosis with Machine Learning
 
-## Project Overview
-This project builds a Fake News Detection System trained on a dataset containing real and fake news articles. It uses TF-IDF vectorization and a Logistic Regression or Naive Bayes classifier to analyze the textual patterns of news content. The system is deployed with Streamlit for easy interaction — users can enter a news statement and instantly see if it’s fake or real, along with a confidence score.
+A machine learning web application that predicts medical conditions based on patient details such as age, gender, blood type, billing amount, admission type, test results, and length of hospital stay. The model uses classification techniques to identify likely diagnoses and displays prediction confidence levels in a Streamlit interface.
 
-## Key Features
-- Text preprocessing with cleaning, stopword removal, and lemmatization
-- TF-IDF vectorization for feature extraction
-- Model trained to achieve around 98–99% accuracy
-- Streamlit web interface for real-time predictions
-- Confidence score displayed for each prediction
-- Automatically loads a trained model (or trains one if not found)
+## Features
+- Predicts medical conditions using demographic and clinical details  
+- Interactive web interface built with Streamlit  
+- Displays prediction confidence for top probable conditions  
+- Scalable for integration with hospital data systems  
 
-## Why Some True Statements Are Flagged as Fake
-Short or overly simple sentences such as "Donald Trump is a president of America" may be predicted as fake because the model was trained mostly on full-length news articles. It assumes "fake" when:
-- The text resembles clickbait or incomplete statements seen in fake samples
-- The statement lacks journalistic context such as sources or structure
-- The model detects political figure mentions that often correlated with fake news in the dataset
-
-To improve predictions, provide more context. For example:
-"Donald Trump served as the 45th President of the United States, according to official records."
-This provides linguistic structure and facts, which help the model classify more accurately.
-
-## Tech Stack
-- Python 3
-- Pandas, NumPy
-- NLTK (for stopwords and lemmatization)
-- Scikit-learn (for TF-IDF and model training)
-- Streamlit (for deployment)
-- Joblib (for saving/loading models)
-
-## Dataset 
-link : https://www.kaggle.com/datasets/clmentbisaillon/fake-and-real-news-dataset
-
-## Folder Structure
-Fake-News-Detection/
+## Project Structure
+```
+Medical-Diagnosis-ML/
 │
-├── fake_news_detection.ipynb   # Model training and evaluation
-├── app.py                      # Streamlit application
-├── vectorizer.pkl              # Saved TF-IDF vectorizer
-├── model.pkl                   # Saved ML model
-├── true.csv                    # True news dataset
-├── fake.csv                    # Fake news dataset
-└── README.md                   # Project documentation
+├── app.py                     # Streamlit web application
+├── train_model.py             # Model training script
+├── healthcare_dataset.csv     # Dataset used for model training
+├── medical_diagnosis_rf.joblib  # Trained Random Forest model
+├── medical_scaler.joblib      # Scaler used for numeric features
+├── medical_label_encoder.joblib  # Label encoder for target variable
+└── README.md                  # Project documentation
+```
 
-## How to Run
-1. Install dependencies
-   pip install -r requirements.txt
+## Setup Instructions
+```bash
+# Clone the repository
+git clone https://github.com/your-username/Medical-Diagnosis-ML.git
+cd Medical-Diagnosis-ML
 
-2. Run the Streamlit app
-   streamlit run app.py
+# Create virtual environment
+python -m venv venv
+venv\Scripts\activate  # On Windows
+source venv/bin/activate  # On macOS/Linux
 
-3. Interact with the app  
-   Enter any news content and click "Check News" to get:
-   - Real or Fake label
-   - Confidence percentage
+# Install dependencies
+pip install --upgrade pip
+pip install pandas numpy scikit-learn streamlit joblib matplotlib
 
-## Model Performance
-Accuracy: 98.8%  
-Precision: 0.99  
-Recall: 0.99  
-F1-score: 0.99  
+# Optional: Install OpenCV and imgaug if using image data
+pip install opencv-python imgaug
+```
 
-## Example Predictions
-Input: "The U.S. Senate passed a new infrastructure bill on Tuesday."  
-Output: Real News (Confidence: 97%)
+## Run the Application
+```bash
+# Train the model (if not pre-trained)
+python train_model.py
 
-Input: "NASA confirms Earth will go dark for 15 days next month."  
-Output: Fake News (Confidence: 99%)
+# Launch the Streamlit app
+streamlit run app.py
+```
 
-## Future Improvements
-- Add multiple ML models for comparison
-- Include article source verification
-- Integrate live fact-checking API
+## How It Works
+1. The training script loads the healthcare dataset, performs preprocessing, and trains a classification model.  
+2. The trained model, scaler, and label encoder are saved using joblib.  
+3. The Streamlit app loads these artifacts, accepts user inputs, scales and encodes features, and makes predictions.  
+4. The predicted condition and confidence levels are displayed interactively.
+
+## Technologies Used
+- Python  
+- Scikit-learn  
+- Pandas, NumPy  
+- Streamlit  
+- Joblib  
 
 ## Contributing
 Contributions are welcome!
